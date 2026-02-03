@@ -26,7 +26,7 @@
 
 ### Webアプリ（Streamlit）
 
-1. https://shinsap-kombu.streamlit.app にアクセス
+1. https://ghx5efvjwmsvzpvjm6frwg.streamlit.app/ にアクセス
 2. CSVファイルをアップロード（または サンプルCSVをダウンロードして編集）
 3. 「最適化を実行」をクリック
 4. 結果をCSVでダウンロード
