@@ -23,7 +23,14 @@ jobs:
           APP_URL: https://ghx5efvjwmsvzpvjm6frwg.streamlit.app/
         run: |
           echo "Pinging: ${APP_URL}"
-          curl --silent --max-time 30 --max-redirs 0 \
-            --user-agent "github-actions-streamlit-keepawake" \
-            "${APP_URL}" > /dev/null 2>&1 || true
-          echo "Ping sent."
+          python3 - <<'EOF'
+import urllib.request
+import os
+url = os.environ["APP_URL"]
+try:
+    req = urllib.request.Request(url, headers={"User-Agent": "github-actions-streamlit-keepawake"})
+    urllib.request.urlopen(req, timeout=30)
+except Exception as e:
+    print(f"Note: {e}")
+print("Ping sent.")
+EOF
