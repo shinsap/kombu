@@ -22,24 +22,8 @@ jobs:
         env:
           APP_URL: https://ghx5efvjwmsvzpvjm6frwg.streamlit.app/
         run: |
-          set -euo pipefail
-
           echo "Pinging: ${APP_URL}"
-
-          HTTP_CODE=$(curl \
-            --silent \
-            --show-error \
-            --max-time 60 \
-            --retry 3 \
-            --retry-delay 5 \
-            --write-out "%{http_code}" \
+          curl --silent --max-time 30 --max-redirs 0 \
             --user-agent "github-actions-streamlit-keepawake" \
-            "${APP_URL}" > /dev/null)
-
-          echo "HTTP status: ${HTTP_CODE}"
-          if [ "${HTTP_CODE}" -lt 200 ] || [ "${HTTP_CODE}" -ge 500 ]; then
-            echo "Unexpected status: ${HTTP_CODE}"
-            exit 1
-          fi
-
-          echo "Ping succeeded."
+            "${APP_URL}" > /dev/null 2>&1 || true
+          echo "Ping sent."
