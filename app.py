@@ -56,6 +56,7 @@ st.download_button(
 )
 
 uploaded_file = st.file_uploader("CSVファイルを選択", type=["csv"])
+st.caption("アップロードしたファイルを消去するとリセットされます。")
 
 if uploaded_file is not None:
     try:
